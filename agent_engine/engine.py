@@ -203,7 +203,7 @@ class Controller:
         return await self.checkpoint(state, "commander", "telemetry")
 
     async def telemetry(self, state):
-        from incident_lab.scenarios import scenario_source, scenario_tests
+        from incident_lab.scenarios import scenario_source, scenario_tests, scenario_directory
 
         await self.enter("telemetry", "investigating", "Selecting diagnostic tools against the observed failure", state)
         allowed = {
@@ -239,7 +239,7 @@ class Controller:
             result = await self.tool("telemetry", name, allowed[name])
             self.run.setdefault("selected_tool_results", []).append({"tool_call_id": call.get("id"), "name": name, "result": compact(result, 3000)})
         self.source = await self.tool("telemetry", "read_source_file", lambda: scenario_source(self.run["scenario_id"]))
-        self.tests = await self.tool("telemetry", "identify_relevant_tests", lambda: scenario_tests(self.run["scenario_id"]))
+        self.tests = await self.tool("telemetry", "identify_relevant_tests", lambda: "# Reproduction\n" + scenario_tests(self.run["scenario_id"]) + "\n# Regression contract\n" + (scenario_directory(self.run["scenario_id"]) / "test_regression.py").read_text())
         self.evidence("source", "Current faulty source", {"source": self.source})
         self.evidence("tests", "Trusted reproduction and regression suite", {"source": self.tests})
         return await self.checkpoint(state, "telemetry", "reasoner")
@@ -325,9 +325,17 @@ class Controller:
             self.run["status"] = "awaiting_verification"
             self.run["error"] = "Remote verification is not configured. The candidate has not been executed or verified."
             return await self.checkpoint(state, "verifier", "reporter")
-        result = await self.tool("reproducer", "run_patch_verification", fn,
-                                 {"scenario_id": self.run["scenario_id"], "mode": mode},
-                                 timeout=max(30, self.config.max_duration_seconds - (time.monotonic() - self.started)))
+        try:
+            result = await self.tool("reproducer", "run_patch_verification", fn,
+                                     {"scenario_id": self.run["scenario_id"], "mode": mode},
+                                     timeout=max(30, self.config.max_duration_seconds - (time.monotonic() - self.started)))
+        except Exception as exc:
+            if not getattr(exc, "unavailable", False):
+                raise
+            self.run["status"] = "awaiting_verification"
+            self.run["error"] = redact(str(exc), (self.config.groq_api_key,))
+            await self.emit("commander", self.run["error"], "availability", {})
+            return await self.checkpoint(state, "verifier", "reporter")
         self.run["verification"] = result
         self.evidence("verification", "Isolated before/after and regression results", result)
         self.run["patch_attempts"][-1]["verification"] = result
@@ -349,7 +357,6 @@ class Controller:
             {"scenario_id": self.run["scenario_id"],
              "diagnosis": {key: self.run["diagnosis"][key] for key in ("root_cause", "evidence_ids")},
              "trusted_contract_tests": self.tests,
-             "regression_contract": __import__("incident_lab.scenarios", fromlist=["scenario_directory"]).scenario_directory(self.run["scenario_id"]).joinpath("test_regression.py").read_text(),
              "evidence": [{"id": e["id"], "title": e["title"], "data": verification_summary(e["data"])} for e in self.run["evidence"] if e["kind"] == "verification"][-1:],
              "patch": {key: self.run["patch"][key] for key in ("path", "before", "after", "diff")}}, Review)
         validate_citations(review, self.evidence_ids)

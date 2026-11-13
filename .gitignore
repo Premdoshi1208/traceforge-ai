@@ -22,3 +22,4 @@ htmlcov/
 playwright-report/
 test-results/
 .neon
+*.tsbuildinfo

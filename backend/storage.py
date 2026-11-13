@@ -60,7 +60,7 @@ def insert_run(run: dict, session_hash: str, idempotency_key: str | None) -> Non
     with Session(engine) as db:
         db.add(IncidentRun(id=run["id"], scenario_id=run["scenario_id"], status=run["status"],
                           session_hash=session_hash, idempotency_key=idempotency_key,
-                          created_at=datetime.now(UTC), payload=deepcopy(run)))
+                          created_at=datetime.fromisoformat(run["created_at"]), payload=deepcopy(run)))
         db.commit()
 
 

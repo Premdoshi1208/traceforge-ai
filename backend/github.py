@@ -14,7 +14,7 @@ from backend.config import settings
 
 
 class VerificationUnavailable(RuntimeError):
-    pass
+    unavailable = True
 
 
 async def verify_on_github(scenario_id: str, after_source: str, run_id: str) -> dict:
@@ -58,6 +58,17 @@ async def verify_on_github(scenario_id: str, after_source: str, run_id: str) -> 
             artifact = next((a for a in artifacts_response.json()["artifacts"]
                              if a["name"] == f"verification-{run_id}"), None)
             if not artifact:
+                jobs = await client.get(f"{api}/actions/runs/{remote['id']}/jobs")
+                if jobs.status_code == 200:
+                    for job in jobs.json().get("jobs", []):
+                        check_url = job.get("check_run_url")
+                        if check_url and check_url.startswith("https://api.github.com/"):
+                            notes = await client.get(check_url + "/annotations")
+                            if notes.status_code == 200:
+                                blocker = next((n.get("message", "") for n in notes.json()
+                                                if "not started" in n.get("message", "") or "billing" in n.get("message", "")), "")
+                                if blocker:
+                                    raise VerificationUnavailable("GitHub runner unavailable: " + blocker[:400])
                 raise VerificationUnavailable(f"Verification job completed {remote['conclusion']} without its result artifact.")
             archive = await client.get(artifact["archive_download_url"])
             if archive.status_code == 302:

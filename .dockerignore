@@ -8,3 +8,6 @@
 .local
 artifacts
 .openai
+.agents
+.codex
+.neon

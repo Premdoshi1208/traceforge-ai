@@ -1447,9 +1447,16 @@ function Investigation({ run }: { run: Run }) {
                           hypothesis.description ||
                           "Candidate explanation"}
                       </strong>
-                      {hypothesis.title && hypothesis.description && (
-                        <p>{hypothesis.description}</p>
-                      )}
+                      {hypothesis.title &&
+                        !!(
+                          hypothesis.description || hypothesis.explanation
+                        ) && (
+                          <p>
+                            {String(
+                              hypothesis.description || hypothesis.explanation,
+                            )}
+                          </p>
+                        )}
                       <span className="hypothesis-assessment">
                         {hypothesis.assessment ||
                           hypothesis.status ||
@@ -1482,6 +1489,36 @@ function Investigation({ run }: { run: Run }) {
         </div>
       </div>
       <TraceWaterfall evidence={evidence} />
+      <section className="panel" style={{ marginTop: 24 }}>
+        <div className="panel-heading">
+          <div>
+            <Terminal size={17} />
+            <h2>Tool invocation inspector</h2>
+          </div>
+          <span className="tiny-label">INPUTS · OUTPUTS · EXECUTION IDS</span>
+        </div>
+        {((run.tool_invocations || []) as Array<Record<string, unknown>>).map(
+          (tool, index) => (
+            <details className="timeline-event" key={String(tool.id || index)}>
+              <summary>
+                <span className="timeline-text">
+                  <strong>
+                    {String(tool.name)}
+                    <span>{String(tool.agent)}</span>
+                  </strong>
+                  <span>
+                    {String(tool.status)} ·{" "}
+                    {Number(tool.duration_ms || 0).toFixed(1)} ms ·{" "}
+                    {String(tool.id)}
+                  </span>
+                </span>
+                <ChevronDown size={13} />
+              </summary>
+              <pre className="event-data">{textData(tool)}</pre>
+            </details>
+          ),
+        )}
+      </section>
       {selectedEvidence && (
         <EvidenceDialog
           item={selectedEvidence}
@@ -1544,7 +1581,10 @@ function EvidenceDialog({
   );
 }
 function TraceWaterfall({ evidence }: { evidence: Evidence[] }) {
-  const traceEvidence = evidence.filter((e) => e.kind?.includes("trace"));
+  const traceEvidence = evidence.filter(
+    (e) =>
+      e.kind === "telemetry" && !!(e.data as Record<string, unknown>)?.traces,
+  );
   const spans = traceEvidence
     .flatMap((e) => {
       const d = e.data as Record<string, unknown> | unknown[];
