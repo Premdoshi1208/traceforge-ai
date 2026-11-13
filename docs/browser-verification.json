@@ -1,0 +1,78 @@
+{
+  "base": "https://traceforge-ai-3pb0.onrender.com",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Production broke.Your AI engineer is already investigating.",
+      "overflow": false
+    },
+    {
+      "path": "/control",
+      "status": 200,
+      "title": "Mission control",
+      "overflow": false
+    },
+    {
+      "path": "/intelligence",
+      "status": 200,
+      "title": "Incident intelligence",
+      "overflow": false
+    },
+    {
+      "path": "/evaluations",
+      "status": 200,
+      "title": "Evaluation arena",
+      "overflow": false
+    },
+    {
+      "path": "/architecture",
+      "status": 200,
+      "title": "Built to show its work.",
+      "overflow": false
+    },
+    {
+      "path": "/runs/402be054-b8b5-4c4e-b384-b66e12ef6dd1",
+      "status": 200,
+      "title": "Payment Retry Storm",
+      "overflow": false
+    },
+    {
+      "path": "/runs/402be054-b8b5-4c4e-b384-b66e12ef6dd1/repair",
+      "status": 200,
+      "title": "Payment Retry Storm",
+      "overflow": false
+    },
+    {
+      "path": "/runs/402be054-b8b5-4c4e-b384-b66e12ef6dd1/report",
+      "status": 200,
+      "title": "Payment Retry Storm",
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "viewport": "mobile",
+      "overflow": false
+    },
+    {
+      "path": "/control",
+      "viewport": "mobile",
+      "overflow": false
+    },
+    {
+      "path": "/architecture",
+      "viewport": "mobile",
+      "overflow": false
+    },
+    {
+      "path": "/runs/402be054-b8b5-4c4e-b384-b66e12ef6dd1/repair",
+      "viewport": "mobile",
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "recorded_at": "2026-11-13T20:33:01.604265+00:00",
+  "tested_deployed_commit": "6bedee0b1ff8498eae05a461cacf50e9c0024a86",
+  "mobile_navigation": "opened menu and navigated to Architecture successfully",
+  "fonts": "same-origin licensed WOFF2 assets; public HTTP 200; no CSP console errors"
+}
