@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     reasoning_model: str = "openai/gpt-oss-120b"
     efficient_model: str = "openai/gpt-oss-20b"
     verification_mode: Literal["local", "github", "unavailable"] = "unavailable"
+    verification_unavailable_reason: str = ""
     admin_token: SecretStr = SecretStr("")
     session_secret: SecretStr = SecretStr("")
     github_token: SecretStr = SecretStr("")

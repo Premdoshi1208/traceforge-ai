@@ -18,11 +18,13 @@ services:
       - key: ADMIN_TOKEN
         generateValue: true
       - key: VERIFICATION_MODE
-        value: github
+        value: unavailable
       - key: GITHUB_REPOSITORY
         value: Premdoshi1208/traceforge-ai
-      - key: GITHUB_TOKEN
+      - key: MIGRATION_DATABASE_URL
         sync: false
+      - key: VERIFICATION_UNAVAILABLE_REASON
+        value: Live remote verification is disabled; recorded local verification remains available.
       - key: DAILY_RUN_LIMIT
         value: "12"
       - key: SESSION_RUN_LIMIT

@@ -1,6 +1,6 @@
 {
   "kind": "deterministic_engineering_evaluation",
-  "executed_at": "2026-11-13T19:54:30.542973+00:00",
+  "executed_at": "2026-11-13T20:06:10.897329+00:00",
   "cases": [
     {
       "id": "scenario-discount",
@@ -8,7 +8,7 @@
       "category": "fixture_verification",
       "status": "passed",
       "passed": true,
-      "duration_ms": 432.02,
+      "duration_ms": 963.91,
       "details": {
         "execution": "real ASGI traffic and isolated Python subprocesses",
         "scenario_id": "discount",
@@ -16,7 +16,7 @@
           "requests": 3,
           "errors": 3,
           "error_rate": 1.0,
-          "mean_latency_ms": 0.799,
+          "mean_latency_ms": 9.418,
           "baseline_requests": 1,
           "baseline_errors": 0,
           "downstream_requests": 0
@@ -24,10 +24,10 @@
         "verification": {
           "before": {
             "exit_code": 1,
-            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-urd3qcaa/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-urd3qcaa/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-urd3qcaa test_reproduction",
-            "duration_ms": 86.538,
-            "timestamp": "2026-11-13T19:54:28.476592+00:00",
+            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5wdtf1js/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5wdtf1js/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5wdtf1js test_reproduction",
+            "duration_ms": 254.472,
+            "timestamp": "2026-11-13T20:06:07.241614+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "1c263cb56779fb1e179488592d4a58b2395cc8a8bbcaff5bbdde8a9c7dc40958"
@@ -35,19 +35,19 @@
           "after": {
             "exit_code": 0,
             "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-rmnxzptx test_reproduction",
-            "duration_ms": 107.966,
-            "timestamp": "2026-11-13T19:54:28.584815+00:00",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-fvixv228 test_reproduction",
+            "duration_ms": 272.575,
+            "timestamp": "2026-11-13T20:06:07.514499+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "b63cbe05e37e0b3d40dc42aa17427b7e63aaf5824fcaafc3f3973998b337958f"
           },
           "regression": {
             "exit_code": 0,
-            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... ok\ntest_full_discount (test_regression.Regression.test_full_discount) ... ok\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... ok\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... ok\ntest_no_discount (test_regression.Regression.test_no_discount) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-baqvalzh test_regression",
-            "duration_ms": 182.538,
-            "timestamp": "2026-11-13T19:54:28.767662+00:00",
+            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... ok\ntest_full_discount (test_regression.Regression.test_full_discount) ... ok\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... ok\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... ok\ntest_no_discount (test_regression.Regression.test_no_discount) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-0brocae3 test_regression",
+            "duration_ms": 126.288,
+            "timestamp": "2026-11-13T20:06:07.642099+00:00",
             "suite": "test_regression",
             "mode": "local_subprocess",
             "source_sha256": "b63cbe05e37e0b3d40dc42aa17427b7e63aaf5824fcaafc3f3973998b337958f"
@@ -67,7 +67,7 @@
       "category": "fixture_verification",
       "status": "passed",
       "passed": true,
-      "duration_ms": 596.43,
+      "duration_ms": 1097.27,
       "details": {
         "execution": "real ASGI traffic and isolated Python subprocesses",
         "scenario_id": "retry",
@@ -75,7 +75,7 @@
           "requests": 3,
           "errors": 3,
           "error_rate": 1.0,
-          "mean_latency_ms": 22.936,
+          "mean_latency_ms": 34.771,
           "baseline_requests": 1,
           "baseline_errors": 0,
           "downstream_requests": 12
@@ -83,30 +83,30 @@
         "verification": {
           "before": {
             "exit_code": 1,
-            "output": "test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget) ... FAIL\n\n======================================================================\nFAIL: test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-amn9m346/test_reproduction.py\", line 13, in test_downstream_attempt_budget\n    self.assertEqual(len(calls), 3, \"payment attempts exceeded the configured budget\")\nAssertionError: 4 != 3 : payment attempts exceeded the configured budget\n\n----------------------------------------------------------------------\nRan 1 test in 0.007s\n\nFAILED (failures=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-amn9m346 test_reproduction",
-            "duration_ms": 135.289,
-            "timestamp": "2026-11-13T19:54:29.026768+00:00",
+            "output": "test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget) ... FAIL\n\n======================================================================\nFAIL: test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-go15ujyq/test_reproduction.py\", line 13, in test_downstream_attempt_budget\n    self.assertEqual(len(calls), 3, \"payment attempts exceeded the configured budget\")\nAssertionError: 4 != 3 : payment attempts exceeded the configured budget\n\n----------------------------------------------------------------------\nRan 1 test in 0.010s\n\nFAILED (failures=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-go15ujyq test_reproduction",
+            "duration_ms": 340.032,
+            "timestamp": "2026-11-13T20:06:08.188081+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "b1d437c6f8e547ff1a2f4459a2494a95c084a0aafcbf8746b27ae84d4b8f4364"
           },
           "after": {
             "exit_code": 0,
-            "output": "test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-4k2z4bi6 test_reproduction",
-            "duration_ms": 188.449,
-            "timestamp": "2026-11-13T19:54:29.215380+00:00",
+            "output": "test_downstream_attempt_budget (test_reproduction.Reproduction.test_downstream_attempt_budget) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.008s\n\nOK\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-k824uyd2 test_reproduction",
+            "duration_ms": 261.108,
+            "timestamp": "2026-11-13T20:06:08.449537+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "e5fddc8d31fc22ae9e3916f552f80ef92d971a39fd89bba3d234f7107c203c8e"
           },
           "regression": {
             "exit_code": 0,
-            "output": "test_immediate_success (test_regression.Regression.test_immediate_success) ... ok\ntest_non_timeout_errors_are_not_retried (test_regression.Regression.test_non_timeout_errors_are_not_retried) ... ok\ntest_recovers_on_second_attempt (test_regression.Regression.test_recovers_on_second_attempt) ... ok\ntest_single_attempt_budget (test_regression.Regression.test_single_attempt_budget) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.006s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-yojt1aky test_regression",
-            "duration_ms": 149.266,
-            "timestamp": "2026-11-13T19:54:29.364860+00:00",
+            "output": "test_immediate_success (test_regression.Regression.test_immediate_success) ... ok\ntest_non_timeout_errors_are_not_retried (test_regression.Regression.test_non_timeout_errors_are_not_retried) ... ok\ntest_recovers_on_second_attempt (test_regression.Regression.test_recovers_on_second_attempt) ... ok\ntest_single_attempt_budget (test_regression.Regression.test_single_attempt_budget) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.018s\n\nOK\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-retry-anhp49t9 test_regression",
+            "duration_ms": 291.168,
+            "timestamp": "2026-11-13T20:06:08.740981+00:00",
             "suite": "test_regression",
             "mode": "local_subprocess",
             "source_sha256": "e5fddc8d31fc22ae9e3916f552f80ef92d971a39fd89bba3d234f7107c203c8e"
@@ -126,7 +126,7 @@
       "category": "fixture_verification",
       "status": "passed",
       "passed": true,
-      "duration_ms": 205.88,
+      "duration_ms": 640.28,
       "details": {
         "execution": "real ASGI traffic and isolated Python subprocesses",
         "scenario_id": "inventory",
@@ -134,7 +134,7 @@
           "requests": 3,
           "errors": 3,
           "error_rate": 1.0,
-          "mean_latency_ms": 0.893,
+          "mean_latency_ms": 2.169,
           "baseline_requests": 1,
           "baseline_errors": 0,
           "downstream_requests": 0
@@ -142,10 +142,10 @@
         "verification": {
           "before": {
             "exit_code": 1,
-            "output": "test_inventory_v2_response (test_reproduction.Reproduction.test_inventory_v2_response) ... ERROR\n\n======================================================================\nERROR: test_inventory_v2_response (test_reproduction.Reproduction.test_inventory_v2_response)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-kn9t_83n/test_reproduction.py\", line 7, in test_inventory_v2_response\n    self.assertTrue(validate_inventory({\"stock\": {\"available\": 12}}, 2))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-kn9t_83n/service.py\", line 3, in validate_inventory\n    available = response[\"available\"]\n                ~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'available'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-kn9t_83n test_reproduction",
-            "duration_ms": 58.496,
-            "timestamp": "2026-11-13T19:54:29.454281+00:00",
+            "output": "test_inventory_v2_response (test_reproduction.Reproduction.test_inventory_v2_response) ... ERROR\n\n======================================================================\nERROR: test_inventory_v2_response (test_reproduction.Reproduction.test_inventory_v2_response)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-c0k9raoy/test_reproduction.py\", line 7, in test_inventory_v2_response\n    self.assertTrue(validate_inventory({\"stock\": {\"available\": 12}}, 2))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-c0k9raoy/service.py\", line 3, in validate_inventory\n    available = response[\"available\"]\n                ~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'available'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-c0k9raoy test_reproduction",
+            "duration_ms": 207.277,
+            "timestamp": "2026-11-13T20:06:09.069433+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "accbbb9373958d99f614df362ff619affa0a3c665490c6138e086f2eacbd3e07"
@@ -153,19 +153,19 @@
           "after": {
             "exit_code": 0,
             "output": "test_inventory_v2_response (test_reproduction.Reproduction.test_inventory_v2_response) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-61cwxb_d test_reproduction",
-            "duration_ms": 56.759,
-            "timestamp": "2026-11-13T19:54:29.511191+00:00",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-scz1048e test_reproduction",
+            "duration_ms": 149.3,
+            "timestamp": "2026-11-13T20:06:09.218994+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "72b27d4e8af012697bb6aee69592e3ae38d1082b47a08a3a5decb6ef762a4602"
           },
           "regression": {
             "exit_code": 0,
-            "output": "test_empty_response_is_rejected (test_regression.Regression.test_empty_response_is_rejected) ... ok\ntest_exact_stock (test_regression.Regression.test_exact_stock) ... ok\ntest_insufficient_v2_stock (test_regression.Regression.test_insufficient_v2_stock) ... ok\ntest_legacy_contract (test_regression.Regression.test_legacy_contract) ... ok\ntest_zero_quantity (test_regression.Regression.test_zero_quantity) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-1lnmuxou test_regression",
-            "duration_ms": 59.463,
-            "timestamp": "2026-11-13T19:54:29.570769+00:00",
+            "output": "test_empty_response_is_rejected (test_regression.Regression.test_empty_response_is_rejected) ... ok\ntest_exact_stock (test_regression.Regression.test_exact_stock) ... ok\ntest_insufficient_v2_stock (test_regression.Regression.test_insufficient_v2_stock) ... ok\ntest_legacy_contract (test_regression.Regression.test_legacy_contract) ... ok\ntest_zero_quantity (test_regression.Regression.test_zero_quantity) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-inventory-fjgfyyao test_regression",
+            "duration_ms": 161.811,
+            "timestamp": "2026-11-13T20:06:09.381095+00:00",
             "suite": "test_regression",
             "mode": "local_subprocess",
             "source_sha256": "72b27d4e8af012697bb6aee69592e3ae38d1082b47a08a3a5decb6ef762a4602"
@@ -185,7 +185,7 @@
       "category": "evidence_integrity",
       "status": "passed",
       "passed": true,
-      "duration_ms": 55.28,
+      "duration_ms": 140.21,
       "details": {
         "actual_evidence_id": "ev-001",
         "distractor_evidence_id": "ev-002",
@@ -199,7 +199,7 @@
       "category": "evidence_integrity",
       "status": "passed",
       "passed": true,
-      "duration_ms": 13.33,
+      "duration_ms": 24.25,
       "details": {
         "hypotheses_preserved": 2,
         "unknown_reference_rejected": true,
@@ -212,7 +212,7 @@
       "category": "evidence_integrity",
       "status": "passed",
       "passed": true,
-      "duration_ms": 11.28,
+      "duration_ms": 19.71,
       "details": {
         "unrelated_service": "search",
         "deployment_alone_is_not_verification": true,
@@ -225,35 +225,35 @@
       "category": "verification_policy",
       "status": "passed",
       "passed": true,
-      "duration_ms": 276.21,
+      "duration_ms": 411.22,
       "details": {
         "verification": {
           "before": {
             "exit_code": 1,
-            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-t36m8zq4/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-t36m8zq4/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-t36m8zq4 test_reproduction",
-            "duration_ms": 67.747,
-            "timestamp": "2026-11-13T19:54:29.741078+00:00",
+            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-whjud3r7/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-whjud3r7/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-whjud3r7 test_reproduction",
+            "duration_ms": 108.121,
+            "timestamp": "2026-11-13T20:06:09.721905+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "1c263cb56779fb1e179488592d4a58b2395cc8a8bbcaff5bbdde8a9c7dc40958"
           },
           "after": {
             "exit_code": 1,
-            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-xkvhbjwi/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-xkvhbjwi/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-xkvhbjwi test_reproduction",
-            "duration_ms": 89.947,
-            "timestamp": "2026-11-13T19:54:29.831215+00:00",
+            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-r_364pwe/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-r_364pwe/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-r_364pwe test_reproduction",
+            "duration_ms": 123.594,
+            "timestamp": "2026-11-13T20:06:09.845818+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "1c263cb56779fb1e179488592d4a58b2395cc8a8bbcaff5bbdde8a9c7dc40958"
           },
           "regression": {
             "exit_code": 1,
-            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... ERROR\ntest_full_discount (test_regression.Regression.test_full_discount) ... ERROR\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... ok\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... ok\ntest_no_discount (test_regression.Regression.test_no_discount) ... ERROR\n\n======================================================================\nERROR: test_decimal_discount (test_regression.Regression.test_decimal_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/test_regression.py\", line 13, in test_decimal_discount\n    self.assertEqual(calculate_total(80, \"12.5\"), 70.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n======================================================================\nERROR: test_full_discount (test_regression.Regression.test_full_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/test_regression.py\", line 16, in test_full_discount\n    self.assertEqual(calculate_total(99.99, \"100\"), 0.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n======================================================================\nERROR: test_no_discount (test_regression.Regression.test_no_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/test_regression.py\", line 10, in test_no_discount\n    self.assertEqual(calculate_total(17.95, \"0\"), 17.95)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nFAILED (errors=3)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-y1lxlq0y test_regression",
-            "duration_ms": 95.206,
-            "timestamp": "2026-11-13T19:54:29.926679+00:00",
+            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... ERROR\ntest_full_discount (test_regression.Regression.test_full_discount) ... ERROR\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... ok\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... ok\ntest_no_discount (test_regression.Regression.test_no_discount) ... ERROR\n\n======================================================================\nERROR: test_decimal_discount (test_regression.Regression.test_decimal_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/test_regression.py\", line 13, in test_decimal_discount\n    self.assertEqual(calculate_total(80, \"12.5\"), 70.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n======================================================================\nERROR: test_full_discount (test_regression.Regression.test_full_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/test_regression.py\", line 16, in test_full_discount\n    self.assertEqual(calculate_total(99.99, \"100\"), 0.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n======================================================================\nERROR: test_no_discount (test_regression.Regression.test_no_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/test_regression.py\", line 10, in test_no_discount\n    self.assertEqual(calculate_total(17.95, \"0\"), 17.95)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 5 tests in 0.003s\n\nFAILED (errors=3)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-7tkzn9w7 test_regression",
+            "duration_ms": 130.428,
+            "timestamp": "2026-11-13T20:06:09.976697+00:00",
             "suite": "test_regression",
             "mode": "local_subprocess",
             "source_sha256": "1c263cb56779fb1e179488592d4a58b2395cc8a8bbcaff5bbdde8a9c7dc40958"
@@ -273,15 +273,15 @@
       "category": "verification_policy",
       "status": "passed",
       "passed": true,
-      "duration_ms": 337.54,
+      "duration_ms": 522.03,
       "details": {
         "verification": {
           "before": {
             "exit_code": 1,
-            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5hwhqhai/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5hwhqhai/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-5hwhqhai test_reproduction",
-            "duration_ms": 93.536,
-            "timestamp": "2026-11-13T19:54:30.057016+00:00",
+            "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ERROR\n\n======================================================================\nERROR: test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-mmowzkiw/test_reproduction.py\", line 7, in test_checkout_discount_from_http_json\n    self.assertEqual(calculate_total(100, \"10\"), 90.0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-mmowzkiw/service.py\", line 3, in calculate_total\n    return round(subtotal * (1 - discount_percent / 100), 2)\n                                 ~~~~~~~~~~~~~~~~~^~~~~\nTypeError: unsupported operand type(s) for /: 'str' and 'int'\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-mmowzkiw test_reproduction",
+            "duration_ms": 208.232,
+            "timestamp": "2026-11-13T20:06:10.235473+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "1c263cb56779fb1e179488592d4a58b2395cc8a8bbcaff5bbdde8a9c7dc40958"
@@ -289,19 +289,19 @@
           "after": {
             "exit_code": 0,
             "output": "test_checkout_discount_from_http_json (test_reproduction.Reproduction.test_checkout_discount_from_http_json) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-6xg04hau test_reproduction",
-            "duration_ms": 81.953,
-            "timestamp": "2026-11-13T19:54:30.139151+00:00",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-imakphhg test_reproduction",
+            "duration_ms": 103.523,
+            "timestamp": "2026-11-13T20:06:10.339175+00:00",
             "suite": "test_reproduction",
             "mode": "local_subprocess",
             "source_sha256": "ce9106235909c5aed744e6a041914505572bc6fda80e02734903ff9634a57e06"
           },
           "regression": {
             "exit_code": 1,
-            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... FAIL\ntest_full_discount (test_regression.Regression.test_full_discount) ... FAIL\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... FAIL\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... FAIL\ntest_no_discount (test_regression.Regression.test_no_discount) ... FAIL\n\n======================================================================\nFAIL: test_decimal_discount (test_regression.Regression.test_decimal_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw/test_regression.py\", line 13, in test_decimal_discount\n    self.assertEqual(calculate_total(80, \"12.5\"), 70.0)\nAssertionError: 90.0 != 70.0\n\n======================================================================\nFAIL: test_full_discount (test_regression.Regression.test_full_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw/test_regression.py\", line 16, in test_full_discount\n    self.assertEqual(calculate_total(99.99, \"100\"), 0.0)\nAssertionError: 90.0 != 0.0\n\n======================================================================\nFAIL: test_integer_discount (test_regression.Regression.test_integer_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw/test_regression.py\", line 7, in test_integer_discount\n    self.assertEqual(calculate_total(200, 25), 150.0)\nAssertionError: 90.0 != 150.0\n\n======================================================================\nFAIL: test_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw/test_regression.py\", line 19, in test_invalid_discount_rejected\n    with self.assertRaises((ValueError, TypeError)):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (<class 'ValueError'>, <class 'TypeError'>) not raised\n\n======================================================================\nFAIL: test_no_discount (test_regression.Regression.test_no_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw/test_regression.py\", line 10, in test_no_discount\n    self.assertEqual(calculate_total(17.95, \"0\"), 17.95)\nAssertionError: 90.0 != 17.95\n\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nFAILED (failures=5)\n",
-            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-m1u8nsfw test_regression",
-            "duration_ms": 124.782,
-            "timestamp": "2026-11-13T19:54:30.264215+00:00",
+            "output": "test_decimal_discount (test_regression.Regression.test_decimal_discount) ... FAIL\ntest_full_discount (test_regression.Regression.test_full_discount) ... FAIL\ntest_integer_discount (test_regression.Regression.test_integer_discount) ... FAIL\ntest_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected) ... FAIL\ntest_no_discount (test_regression.Regression.test_no_discount) ... FAIL\n\n======================================================================\nFAIL: test_decimal_discount (test_regression.Regression.test_decimal_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj/test_regression.py\", line 13, in test_decimal_discount\n    self.assertEqual(calculate_total(80, \"12.5\"), 70.0)\nAssertionError: 90.0 != 70.0\n\n======================================================================\nFAIL: test_full_discount (test_regression.Regression.test_full_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj/test_regression.py\", line 16, in test_full_discount\n    self.assertEqual(calculate_total(99.99, \"100\"), 0.0)\nAssertionError: 90.0 != 0.0\n\n======================================================================\nFAIL: test_integer_discount (test_regression.Regression.test_integer_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj/test_regression.py\", line 7, in test_integer_discount\n    self.assertEqual(calculate_total(200, 25), 150.0)\nAssertionError: 90.0 != 150.0\n\n======================================================================\nFAIL: test_invalid_discount_rejected (test_regression.Regression.test_invalid_discount_rejected)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj/test_regression.py\", line 19, in test_invalid_discount_rejected\n    with self.assertRaises((ValueError, TypeError)):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (<class 'ValueError'>, <class 'TypeError'>) not raised\n\n======================================================================\nFAIL: test_no_discount (test_regression.Regression.test_no_discount)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj/test_regression.py\", line 10, in test_no_discount\n    self.assertEqual(calculate_total(17.95, \"0\"), 17.95)\nAssertionError: 90.0 != 17.95\n\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nFAILED (failures=5)\n",
+            "command": "/Users/mac/Desktop/new/.venv/bin/python3 -I -B /Users/mac/Desktop/new/verification/_subprocess.py /var/folders/1m/jgp5mml162n_6chc5_p2nr_80000gn/T/traceforge-discount-ydkmowkj test_regression",
+            "duration_ms": 159.481,
+            "timestamp": "2026-11-13T20:06:10.498881+00:00",
             "suite": "test_regression",
             "mode": "local_subprocess",
             "source_sha256": "ce9106235909c5aed744e6a041914505572bc6fda80e02734903ff9634a57e06"
@@ -334,7 +334,7 @@
       "category": "telemetry",
       "status": "passed",
       "passed": true,
-      "duration_ms": 77.16,
+      "duration_ms": 94.04,
       "details": {
         "actual_status_codes": [
           504,
@@ -352,7 +352,7 @@
       "category": "security_boundary",
       "status": "passed",
       "passed": true,
-      "duration_ms": 12.35,
+      "duration_ms": 12.58,
       "details": {
         "unauthorized_tool_executed": false,
         "rejected_attempts": 1,
@@ -366,7 +366,7 @@
       "category": "controller_transition",
       "status": "passed",
       "passed": true,
-      "duration_ms": 9.05,
+      "duration_ms": 9.47,
       "details": {
         "actual_transition": {
           "step": 1,
@@ -384,7 +384,7 @@
       "category": "durability",
       "status": "passed",
       "passed": true,
-      "duration_ms": 158.43,
+      "duration_ms": 243.94,
       "details": {
         "recovered_status": "interrupted",
         "evidence_preserved": true,
@@ -400,7 +400,7 @@
       "category": "security_boundary",
       "status": "passed",
       "passed": true,
-      "duration_ms": 0.59,
+      "duration_ms": 0.99,
       "details": {
         "unsafe_patch_rejected": true,
         "reason": "Forbidden Python syntax: Attribute",
@@ -413,7 +413,7 @@
       "category": "availability",
       "status": "passed",
       "passed": true,
-      "duration_ms": 20.32,
+      "duration_ms": 36.06,
       "details": {
         "status": "failed",
         "model_requests": 0,
@@ -426,7 +426,7 @@
     "executed": 15,
     "passed": 15,
     "failed": 0,
-    "duration_ms": 2205.91,
+    "duration_ms": 4216.0,
     "model_requests": 0,
     "tokens": 0,
     "diagnosis_accuracy": null,

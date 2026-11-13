@@ -112,6 +112,7 @@ async def config(request: Request):
     return {"groq_configured": bool(settings.groq_api_key.get_secret_value()),
             "live_enabled": bool(settings.groq_api_key.get_secret_value()),
             "verification_mode": settings.effective_verification,
+            "verification_notice": settings.verification_unavailable_reason,
             "models": [settings.reasoning_model, settings.efficient_model],
             "model_routing": {"reasoning": settings.reasoning_model, "efficient": settings.efficient_model},
             "limits": {"daily_runs": settings.daily_run_limit, "session_runs": settings.session_run_limit,

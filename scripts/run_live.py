@@ -29,9 +29,12 @@ def main():
            'model':settings.reasoning_model,'events':[],'evidence':[],'hypotheses':[],'patch':None,
            'verification':None,'review':None,'report':None,'usage':{'requests':0,'tokens':0},'error':None,
            'controlled_scenario':True,'recorded_example':True,'recording_label':'Recorded from actual local execution'}
-    storage.insert_run(run,'developer-local-evaluation',None)
+    publish_at_completion = settings.app_env == 'production'
+    if not publish_at_completion:
+        storage.insert_run(run,'developer-local-evaluation',None)
     async def save(current):
-        storage.save_run(redact(current))
+        if not publish_at_completion:
+            storage.save_run(redact(current))
         output=Path('.local')/f"live-{args.scenario}-{current['id']}.json"
         output.write_text(json.dumps(redact(current),indent=2))
     async def emit(agent,message,type='step',data=None):
@@ -44,6 +47,9 @@ def main():
         efficient_model=settings.efficient_model,verification_mode='local',max_duration_seconds=600,max_tokens=18000)
     asyncio.run(execute(run,emit,save,cfg))
     asyncio.run(save(run))
+    if publish_at_completion:
+        storage.insert_run(redact(run),'developer-local-evaluation',None)
+        storage.save_run(redact(run))
     print(json.dumps({'id':run['id'],'scenario':args.scenario,'status':run['status'],'usage':run['usage'],'error':run.get('error')}))
 
 

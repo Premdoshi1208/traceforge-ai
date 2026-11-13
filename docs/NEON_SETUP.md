@@ -15,3 +15,5 @@ Changes:
 - For the already authorized TraceForge deployment, created a separate Free-plan traceforge-ai database project, linked .neon with --no-env-pull, and added .neon to .gitignore. Local .env remained unchanged; private deployment values are in ignored .env.production.
 
 Two byte-identical SKILL 2.md duplicates were privately backed up and removed. Those duplicates caused stale content hashes in skills-lock.json. Every installed skill file was verified byte-for-byte against GitHub blob hashes, then canonical lock hashes were recalculated. neon skills status now confirms both skills up to date. The Neon MCP connection was also exercised successfully in this conversation using a read-only project lookup.
+
+The initial empty workspace was renamed by the user to /Users/mac/Desktop/new. Generated Python tooling was recreated for that path. Existing project environment values were preserved. No unrelated Neon project, branch, authentication provider, or data was modified.

@@ -903,6 +903,12 @@ function Control() {
               <ArrowRight size={15} />
             </Button>
           </div>
+          {config?.verification_notice && (
+            <div className="capacity-note">
+              <ShieldCheck size={14} />
+              {config.verification_notice}
+            </div>
+          )}
           {!config?.groq_configured && (
             <div className="capacity-note">
               <TriangleAlert size={14} />
@@ -1121,7 +1127,27 @@ function useRun(id: string) {
       `/api/runs/${encodeURIComponent(id)}/events`,
     );
     events.onopen = () => setConnected(true);
-    events.onmessage = () => void refresh();
+    events.onmessage = () => {
+      if (alive) setConnected(true);
+    };
+    events.addEventListener("snapshot", (event) => {
+      if (!alive) return;
+      try {
+        const snapshot = JSON.parse((event as MessageEvent).data) as Run;
+        setRun(snapshot);
+        if (terminalStatuses.has(snapshot.status)) {
+          events.close();
+          setConnected(false);
+        }
+      } catch {
+        void refresh();
+      }
+    });
+    events.addEventListener("complete", () => {
+      events.close();
+      setConnected(false);
+      void refresh();
+    });
     events.addEventListener("execution", () => void refresh());
     events.addEventListener("update", () => void refresh());
     events.onerror = () => setConnected(false);
@@ -1802,7 +1828,10 @@ function Repair({ run }: { run: Run }) {
       <div className="test-results">
         <TestPanel
           title="Before · reproduction"
-          result={run.verification?.before}
+          result={
+            run.verification?.before ||
+            (run.reproduction as TestResult | undefined)
+          }
           expectedFailure
         />
         <TestPanel

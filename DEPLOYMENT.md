@@ -9,7 +9,7 @@ Deploy one Docker web service on Render Free and durable PostgreSQL on Neon Free
 - DATABASE_URL: pooled Neon PostgreSQL URL with TLS
 - MIGRATION_DATABASE_URL: direct Neon URL with TLS
 - SESSION_SECRET and ADMIN_TOKEN: independent high-entropy secrets
-- VERIFICATION_MODE=github
+- VERIFICATION_MODE=unavailable (owner-selected current deployment; use github only after scoped access and runner availability are verified)
 - GITHUB_REPOSITORY: fixed curated repository
 - GITHUB_TOKEN: server secret permitted to dispatch/read the verification workflow
 - DAILY_RUN_LIMIT=12, SESSION_RUN_LIMIT=2, MAX_CONCURRENT_RUNS=1
@@ -23,3 +23,9 @@ Render's free web service may sleep after inactivity and its filesystem is ephem
 ## Verification
 
 Check public landing, `/healthz`, `/readyz`, config, scenarios, history, evaluations, and a full live incident through public HTTPS. Inspect the actual GitHub job and artifacts, before/after/regression test output, evidence references, review, report downloads, mobile layout, and browser console. A 200 landing response alone is insufficient.
+
+## Current verification limitation
+
+GitHub rejected jobs before execution because account Premdoshi1208 was locked due to a billing issue. The owner selected leaving live remote verification unavailable. The deployed runtime retains no GitHub credential. Three actual Groq-generated repairs have recorded local subprocess before/after/regression results and accepted model reviews; these are explicitly labeled local recordings. Public live runs collect failures, infer diagnoses, reproduce trusted fixtures, generate constrained patches, and produce reports with an awaiting-verification verdict. They never receive a VERIFIED badge without test proof.
+
+A GitHub App registration completed during the optional consent flow, but installation was not confirmed before the owner declined remote verification. Setup was stopped and all generated app credentials were removed from the deployment environment. No remote pull request was created.

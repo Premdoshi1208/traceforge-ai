@@ -16,7 +16,9 @@ from typing import Any
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.trace import Status, StatusCode
 
 from incident_lab.scenarios import get_scenario, scenario_directory
 
@@ -42,7 +44,8 @@ async def observe(scenario_id: str) -> dict[str, Any]:
     logs: list[dict] = []
     spans: list[dict] = []
     responses: list[dict] = []
-    tracer = trace.get_tracer("traceforge.incident_lab")
+    otel_provider = TracerProvider(resource=Resource.create({"service.name": "traceforge-incident-lab"}))
+    tracer = otel_provider.get_tracer("traceforge.incident_lab")
     modules = {
         (name, healthy): load_trusted_fixture(name, healthy)
         for name in ("discount", "retry", "inventory") for healthy in (False, True)
@@ -57,6 +60,9 @@ async def observe(scenario_id: str) -> dict[str, Any]:
                   "service": service, "name": operation, "phase": phase,
                   "started_at": now(), "start_ms": round((begin - started) * 1000, 3), "status": "ok"}
         with tracer.start_as_current_span(f"{service}.{operation}") as otel_span:
+            context = otel_span.get_span_context()
+            record["otel_trace_id"] = format(context.trace_id, "032x")
+            record["otel_span_id"] = format(context.span_id, "016x")
             otel_span.set_attribute("traceforge.scenario", scenario_id)
             otel_span.set_attribute("traceforge.trace_id", trace_id)
             try:
@@ -67,6 +73,8 @@ async def observe(scenario_id: str) -> dict[str, Any]:
                 otel_span.record_exception(exc)
                 raise
             finally:
+                if record["status"] == "error":
+                    otel_span.set_status(Status(StatusCode.ERROR))
                 record["duration_ms"] = round((time.perf_counter() - begin) * 1000, 3)
                 spans.append(record)
 
@@ -155,6 +163,7 @@ async def observe(scenario_id: str) -> dict[str, Any]:
             begin = time.perf_counter()
             response = await client.post("/gateway/checkout", json={"subtotal": 100, "discount_percent": "10", "quantity": 2}, headers={"x-trace-id": tid, "x-phase": phase})
             responses.append({"trace_id": tid, "phase": phase, "status_code": response.status_code, "duration_ms": round((time.perf_counter() - begin) * 1000, 3), "body": response.json()})
+    otel_provider.shutdown()
     faulty = [r for r in responses if r["phase"] == "fault"]
     baseline = [r for r in responses if r["phase"] == "baseline"]
     return {

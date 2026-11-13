@@ -8,6 +8,6 @@ Generated source cannot modify tests, CI, secrets, or arbitrary files. AST valid
 
 Owner actions require a high-entropy X-Admin-Token and verified execution evidence. Anonymous callers cannot approve patches. Owner approval never deploys code. External side effects use run/branch identities and reconciliation before replay.
 
-Use a dedicated repository-scoped GitHub credential with Actions read/write and Contents read for verification. PR creation, if enabled, additionally needs Contents and Pull requests write. Keep credentials in secure host settings. Existing CLI account tokens may grant broader access; replace them with a fine-grained token before broader production use. Workflow test jobs receive no application secrets.
+Use a dedicated repository-scoped GitHub credential with Actions read/write and Contents read for verification. PR creation, if enabled, additionally needs Contents and Pull requests write. Keep credentials in secure host settings. No GitHub credential is retained in the deployed runtime while remote verification is disabled. The temporary broader CLI credential was removed from host settings; repository-scoped App consent was not completed. Workflow test jobs receive no application secrets.
 
 Free model access is quota-limited. No fabricated fallback is used when inference or verification is unavailable. Rotate any key pasted into chat or another exposed channel. Security findings should be reported privately to the repository owner.
