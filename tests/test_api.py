@@ -220,3 +220,18 @@ def test_evaluation_response_separates_engineering_and_live_metrics(api):
     assert data["live_runs"]["model_requests"] == 0
     if data.get("kind") == "deterministic_engineering_evaluation":
         assert data["summary"]["diagnosis_accuracy"] is None
+
+
+def test_signed_sessions_do_not_share_a_proxy_quota(api, monkeypatch):
+    monkeypatch.setattr(main.settings, "session_run_limit", 1)
+    first = api.post("/api/runs", json={"scenario_id": "discount"})
+    assert first.status_code == 202
+    assert "httponly" in first.headers["set-cookie"].lower()
+    assert api.post("/api/runs", json={"scenario_id": "discount"}).status_code == 429
+    with TestClient(main.app) as second_browser:
+        second = second_browser.post("/api/runs", json={"scenario_id": "discount"})
+        assert second.status_code == 202
+        assert second_browser.cookies.get("tf_session") != api.cookies.get("tf_session")
+    tampered_hash, replacement = security.session_identity("forged-session.invalid-signature")
+    valid_hash, same_cookie = security.session_identity(replacement)
+    assert tampered_hash == valid_hash and same_cookie == replacement

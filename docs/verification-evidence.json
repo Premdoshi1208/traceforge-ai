@@ -1,0 +1,61 @@
+{
+  "public_live_journey": {
+    "url": "https://traceforge-ai-3pb0.onrender.com",
+    "run_id": "6762c3c1-2890-4250-ae77-cd9b4e0043d5",
+    "status": "awaiting_verification",
+    "usage": {
+      "requests": 3,
+      "tokens": 5393,
+      "rate_limits": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "4302",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "27.735s"
+      }
+    },
+    "evidence_count": 14,
+    "events": 33,
+    "patch_status": 200,
+    "report_status": 200,
+    "error": "Remote verification is not configured. The candidate has not been executed or verified.",
+    "browser_errors": [],
+    "executed_at": "2026-11-13T20:20:43.629Z"
+  },
+  "verification_policy": "Live remote verification disabled by owner; new runs do not receive VERIFIED. Three recorded local repairs passed actual tests and review.",
+  "tests": {
+    "backend_tests": 51,
+    "backend_subtests": 17,
+    "frontend_tests": 11,
+    "engineering_evaluation_cases": 15,
+    "engineering_evaluation_passed": 15
+  },
+  "tested_application_commit": "d99585c167195ce0b0338dd4edb9ad58b3f7cb98",
+  "recorded_repairs": [
+    {
+      "scenario": "discount",
+      "run_id": "7c894bb8-2c49-41d6-96f2-4abd6fdfc067",
+      "mode": "local_subprocess",
+      "before": 1,
+      "after": 0,
+      "regression": 0
+    },
+    {
+      "scenario": "inventory",
+      "run_id": "20ba5936-d57d-4bea-b5ad-7d68c72aeddb",
+      "mode": "local_subprocess",
+      "before": 1,
+      "after": 0,
+      "regression": 0
+    },
+    {
+      "scenario": "retry",
+      "run_id": "402be054-b8b5-4c4e-b384-b66e12ef6dd1",
+      "mode": "local_subprocess",
+      "before": 1,
+      "after": 0,
+      "regression": 0
+    }
+  ]
+}

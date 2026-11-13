@@ -6,6 +6,12 @@ services:
     region: oregon
     autoDeployTrigger: commit
     healthCheckPath: /readyz
+    buildFilter:
+      ignoredPaths:
+        - docs/**
+        - "*.md"
+        - .agents/**
+        - skills-lock.json
     envVars:
       - key: APP_ENV
         value: production
