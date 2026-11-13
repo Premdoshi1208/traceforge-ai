@@ -18,7 +18,7 @@ from sqlalchemy import text
 from backend import storage
 from backend.config import ROOT, settings
 from backend.github import verify_on_github
-from backend.security import actor_hash, admin_authorized, redact
+from backend.security import admin_authorized, redact, session_identity
 
 logger = logging.getLogger("traceforge")
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -56,6 +56,8 @@ app = FastAPI(title="TraceForge AI", version="1.0.0", lifespan=lifespan,
 @app.middleware("http")
 async def boundaries(request: Request, call_next):
     request_id = str(uuid.uuid4())
+    identity, session_cookie = session_identity(request.cookies.get("tf_session"))
+    request.state.quota_identity = identity
     started = time.perf_counter()
     if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
         origin = request.headers.get("origin")
@@ -72,6 +74,9 @@ async def boundaries(request: Request, call_next):
         logger.error(json.dumps({"event": "request_error", "request_id": request_id,
                                 "type": type(exc).__name__}))
         response = JSONResponse({"detail": "The request could not be completed.", "request_id": request_id}, status_code=500)
+    if request.cookies.get("tf_session") != session_cookie:
+        response.set_cookie("tf_session", session_cookie, max_age=86400, httponly=True,
+                            secure=settings.app_env == "production", samesite="lax", path="/")
     response.headers.update({"X-Content-Type-Options": "nosniff", "Referrer-Policy": "same-origin",
         "X-Frame-Options": "DENY", "X-Request-ID": request_id,
         "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
@@ -87,8 +92,8 @@ async def boundaries(request: Request, call_next):
 
 
 def client_identity(request: Request) -> str:
-    # Use only the transport address; do not trust visitor-controlled forwarded headers.
-    return actor_hash(request.client.host if request.client else "unknown")
+    # Signed opaque session; visitor-supplied forwarding headers cannot grant quota.
+    return request.state.quota_identity
 
 
 @app.get("/healthz")
@@ -190,7 +195,7 @@ async def launch(body: Launch, request: Request, idempotency_key: str | None = H
             return redact(previous)
         daily, session, active = storage.quota_counts(identity)
         if daily >= settings.daily_run_limit or (session >= settings.session_run_limit and not admin_authorized(x_admin_token)):
-            raise HTTPException(429, "Demo capacity reached. Explore completed investigations or return tomorrow.", headers={"Retry-After": "3600"})
+            raise HTTPException(429, "Demo capacity reached. Explore completed investigations or return after the daily reset.", headers={"Retry-After": "3600"})
         if active >= settings.max_concurrent_runs:
             raise HTTPException(429, "An investigation is already running. Please inspect its live evidence and try again later.", headers={"Retry-After": "30"})
         now = datetime.now(UTC).isoformat()

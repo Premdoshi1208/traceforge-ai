@@ -34,3 +34,17 @@ def actor_hash(client_address: str) -> str:
 def admin_authorized(token: str | None) -> bool:
     expected = settings.admin_token.get_secret_value()
     return bool(expected and token and hmac.compare_digest(expected, token))
+
+
+def session_identity(cookie: str | None) -> tuple[str, str]:
+    """Opaque signed session cookie, hashed before quota accounting."""
+    identifier = ""
+    if cookie and len(cookie) <= 160 and "." in cookie:
+        candidate, signature = cookie.rsplit(".", 1)
+        expected = hmac.new(_session_key.encode(), candidate.encode(), hashlib.sha256).hexdigest()
+        if len(candidate) == 32 and candidate.isalnum() and hmac.compare_digest(expected, signature):
+            identifier = candidate
+    if not identifier:
+        identifier = secrets.token_hex(16)
+    signature = hmac.new(_session_key.encode(), identifier.encode(), hashlib.sha256).hexdigest()
+    return actor_hash("session:" + identifier), identifier + "." + signature

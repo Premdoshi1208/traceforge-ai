@@ -2,6 +2,11 @@ export type Config = {
   groq_configured: boolean;
   verification_mode: string;
   verification_notice?: string;
+  capacity?: {
+    daily_remaining: number;
+    session_remaining: number;
+    active: number;
+  };
   models: string[];
   limits: Record<string, number | string>;
   github_url?: string;

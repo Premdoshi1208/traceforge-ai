@@ -791,6 +791,10 @@ function Control() {
   }, [scenarios, selected]);
   const active = runs.find((r) => !terminalStatuses.has(r.status));
   const latest = runs[0];
+  const capacityReached =
+    !!config?.capacity &&
+    (config.capacity.daily_remaining <= 0 ||
+      config.capacity.session_remaining <= 0);
   async function launch() {
     if (!selected || launching) return;
     setLaunching(true);
@@ -886,7 +890,11 @@ function Control() {
             <Button
               className="primary"
               disabled={
-                !config?.groq_configured || !selected || launching || !!active
+                !config?.groq_configured ||
+                !selected ||
+                launching ||
+                !!active ||
+                capacityReached
               }
               onClick={() => void launch()}
             >
@@ -899,7 +907,9 @@ function Control() {
                 ? "Launching…"
                 : active
                   ? "Investigation active"
-                  : "Launch investigation"}
+                  : capacityReached
+                    ? "Demo capacity reached"
+                    : "Launch investigation"}
               <ArrowRight size={15} />
             </Button>
           </div>
