@@ -14,4 +14,4 @@ Changes:
 - Reused the authenticated Neon CLI account; no unrelated Neon project or global skill was replaced.
 - For the already authorized TraceForge deployment, created a separate Free-plan traceforge-ai database project, linked .neon with --no-env-pull, and added .neon to .gitignore. Local .env remained unchanged; private deployment values are in ignored .env.production.
 
-The Neon CLI freshness checker reported freshly installed skills as outdated, while its updater reported all skills current. Skills were re-fetched from the official repository; do not interpret this inconsistent CLI status as proof of an outdated install. No skill hashes were falsified to suppress the warning.
+Two byte-identical SKILL 2.md duplicates were privately backed up and removed. Those duplicates caused stale content hashes in skills-lock.json. Every installed skill file was verified byte-for-byte against GitHub blob hashes, then canonical lock hashes were recalculated. neon skills status now confirms both skills up to date. The Neon MCP connection was also exercised successfully in this conversation using a read-only project lookup.

@@ -121,7 +121,14 @@ class GroqClient:
                 self.next_request_at = time.monotonic() + retry_delay(response.headers, 2 ** (attempt + 1))
                 continue
             if response.status_code != 200:
-                raise EngineError(f"Groq returned HTTP {response.status_code}; investigation stopped without a fabricated result")
+                try:
+                    provider_error = response.json().get("error", {})
+                    detail = redact({key: str(provider_error.get(key, ""))[:1200] for key in ("type", "code", "message")}, (self.config.groq_api_key,))
+                except (ValueError, AttributeError):
+                    detail = {"message": "Provider returned an unreadable error response"}
+                self.run.setdefault("provider_errors", []).append({"agent": agent, "status": response.status_code, **detail})
+                await self.save(self.run)
+                raise EngineError(f"Groq returned HTTP {response.status_code}: {detail.get('message', '')[:350]}")
             body = response.json()
             usage = body.get("usage") or {}
             tokens = int(usage.get("total_tokens", 0))
