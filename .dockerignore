@@ -1,0 +1,10 @@
+.env
+.env.*
+.git
+.venv
+**/node_modules
+**/__pycache__
+**/*.db
+.local
+artifacts
+.openai

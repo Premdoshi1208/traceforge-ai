@@ -1,0 +1,52 @@
+name: Verify controlled incident patch
+run-name: verify-${{ inputs.run_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: Allowlisted controlled scenario
+        required: true
+        type: choice
+        options: [discount, retry, inventory]
+      source_b64:
+        description: Base64-encoded candidate source; validated before execution
+        required: true
+        type: string
+      run_id:
+        description: Incident run identifier
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ inputs.run_id }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate scope and execute trusted tests
+        env:
+          SCENARIO_ID: ${{ inputs.scenario }}
+          PATCH_SOURCE_B64: ${{ inputs.source_b64 }}
+          INCIDENT_RUN_ID: ${{ inputs.run_id }}
+          TRACEFORGE_ALLOW_LOCAL_EXECUTION: '1'
+        run: python -m verification.runner
+      - name: Ensure repository source was not modified
+        if: always()
+        run: git diff --exit-code
+      - name: Upload actual test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-${{ inputs.run_id }}
+          path: verification-result.json
+          if-no-files-found: error
+          retention-days: 7
