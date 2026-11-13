@@ -128,6 +128,9 @@ class GroqClient:
                     detail = {"message": "Provider returned an unreadable error response"}
                 self.run.setdefault("provider_errors", []).append({"agent": agent, "status": response.status_code, **detail})
                 await self.save(self.run)
+                if response.status_code == 400 and detail.get("code") in {"json_validate_failed", "tool_use_failed"} and attempt < 2:
+                    await self.emit(agent, "Provider rejected the generated output; retrying within the request budget", "retry", {"code": detail.get("code")})
+                    continue
                 raise EngineError(f"Groq returned HTTP {response.status_code}: {detail.get('message', '')[:350]}")
             body = response.json()
             usage = body.get("usage") or {}

@@ -67,7 +67,7 @@ def objectively_verified(result: dict | None) -> bool:
     before, after, regression = (result.get(key) or {} for key in ("before", "after", "regression"))
     return (
         isinstance(before.get("exit_code"), int)
-        and before["exit_code"] != 0
+        and before["exit_code"] == 1
         and after.get("exit_code") == 0
         and regression.get("exit_code") == 0
         and all(bool(test.get("command")) and bool(test.get("output")) for test in (before, after, regression))
@@ -365,6 +365,8 @@ class Controller:
         await self.tool("reviewer", "evaluate_patch_risk", lambda: review)
         if review["approved"] and objectively_verified(self.run["verification"]):
             self.run["status"] = "verified"
+            self.run["error"] = None
+            self.run["patch_error"] = None
             self.run["patch_attempts"][-1]["status"] = "verified"
         else:
             self.run["status"] = "unverified"

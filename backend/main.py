@@ -157,7 +157,7 @@ async def investigate(run: dict):
         # The public VERIFIED badge is gated by independently recorded tests and review.
         if run["status"] == "verified":
             verification = run.get("verification") or {}
-            if not (verification.get("verified") and verification.get("before", {}).get("exit_code") not in (None, 0)
+            if not (verification.get("verified") and verification.get("before", {}).get("exit_code") == 1
                     and verification.get("after", {}).get("exit_code") == 0
                     and verification.get("regression", {}).get("exit_code") == 0
                     and (run.get("review") or {}).get("approved")):

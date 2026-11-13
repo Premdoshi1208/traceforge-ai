@@ -31,7 +31,7 @@ export function isVerified(run: Pick<Run, "status" | "verification">) {
     run.status === "verified" &&
     run.verification?.verified === true &&
     run.verification?.before?.exit_code !== undefined &&
-    run.verification.before.exit_code !== 0 &&
+    run.verification.before.exit_code === 1 &&
     run.verification.after?.exit_code === 0 &&
     run.verification.regression?.exit_code === 0
   );
